@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - 4.15.4 # use nodejs v4.15.4
+  - 14.15.4 # use nodejs v14.15.4
 cache: npm
 branches:
   only:
