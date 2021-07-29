@@ -103,4 +103,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repository: git@github.com:1flurry/rain_and_tyo.github.io.git
+  branch: gh-page
