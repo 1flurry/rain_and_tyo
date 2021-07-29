@@ -13,8 +13,8 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://rain_and_tyo.github.io/blog
-root: /blog/
+url: https://1flurry.github.io/rain_and_tyo/
+root: /rain_and_tyo/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -103,6 +103,4 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  repository: git@github.com:1flurry/rain_and_tyo.github.io.git
-  branch: gh-page
+  type: ''
