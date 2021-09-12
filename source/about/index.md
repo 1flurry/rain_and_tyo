@@ -18,7 +18,7 @@ header-img: "img/scenery/about_bg.jpg"
 
 ## Just Me
 
-<img src="/img/scenery/about_bg2.jpg" width="350" alt="about_bg2"></img>
+<img src="img/scenery/about_bg2.jpg" width="350" alt="about_bg2"></img>
 
 > 有一种状态 叫一个人 它总是挑战语言的贫乏 只能在某首歌中找寻灵感；
 >

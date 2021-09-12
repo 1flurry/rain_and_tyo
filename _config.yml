@@ -3,20 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: rains&tyo blog
-subtitle: ''
-author: flurry
+title: rains&tyo's blog
+subtitle: 'Talk ih cheap, show me your code'
+author: 1flurry
 timezone: 'Asia/Shanghai'
-
-# Internationalization (i18n) Setting
-language: zh-CN
-langselect:
-  enable: true # If open, it will automatically generation lang-select button.This button can jump in articles in different languages, but the articles must have the same name.
-  options: # langselect button display options
-    en: English
-    cn: 简体中文
-    #tw: 正體中文
-
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -28,7 +18,35 @@ pretty_urls:
   trailing_index: true
   trailing_html: true
 
+# Internationalization (i18n) Setting
+language:
+  - en
+  - cn
+
+langselect:
+  enable: true # If open, it will automatically generation lang-select button.This button can jump in articles in different languages, but the articles must have the same name.
+  options: # langselect button display options
+    en: English
+    cn: 简体中文
+
+# hexo-generator-i18n config
+## Docs: https://github.com/xcatliu/hexo-generator-index-i18n
+index_generator:
+  per_page: 10
+  pagination_dir: page
+  path: ''
+  order_by: -date
+
+archive_generator:
+  enabled: false
+  per_page: 10
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+
 # CDN Setting
+# TODO: CDN speed function
 ## Docs: https://www.jsdelivr.com/?docs=gh
 ## If Github Pages deploy，you can ues jsdelivr settings
 #
@@ -36,36 +54,33 @@ pretty_urls:
 #   jsdelivr_url: https://cdn.jsdelivr.net/gh/
 #   github_username: V-Vincen
 
-
 # Custom Setting Start
 
 # Site settings
-SEOTitle: either thin | or die
-email: hexo-theme-livemylife@gmail.com
+SEOTitle: ClearLove | 爱你所选
+email: flurry_rains@qq.com
 description: "It's an IT blog..."
-keyword: "1flurry,1flurry, livemylife,IT  blog,Blog"
+keyword: "C,Python,1flurry,1flurry,Geek,IT blog,Blog"
 header-img: img/header_img/newhome_bg.jpg
 archives-img: img/header_img/archive_bg2.jpg
 
 
 # Favicon settings
-favicon: img/avatar/roguerabbit.jpg
-
+favicon: img/avatar/WebIcon.jpg
 
 # Signature Setup
 signature: true # show signature
-signature-img: img/signature/vincent-white.png
-
+signature-img: img/signature/happygeek-white.png
 
 # Wave settings
-wave: true
+wave: false
 
 
 # SNS Settings
 # RSS: true
 github_username: 1flurry
-twitter_username: 1flurry
-instagram_username: 1flurry
+# twitter_username: 1flurry
+# instagram_username: 1flurry
 # facebook_username:  yourAccount
 # linkedin_username:  yourAccount
 # zhihu_username: WVincen
@@ -74,8 +89,8 @@ instagram_username: 1flurry
 
 # Sidebar Settings
 sidebar: true   # whether or not using Sidebar.
-sidebar-about-description: "Fat people have no future, either thin or die..."
-sidebar-avatar: img/avatar/fatpeople.jpg    # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "Happy geek, just for fun!"
+sidebar-avatar: img/avatar/aboutme.jpg    # use absolute URL, seeing it's used in both `/` and `/about/`
 widgets:
 - visitor   # busuanzi: https://busuanzi.ibruce.info/
 - featured-tags
@@ -98,23 +113,26 @@ featured-condition-size: 0    # A tag will be featured if the size of it is more
 ## Friends
 friends: [
     {
-        title: "V_Vincen",
-        href: "https://v-vincen.life/"
+        title: "flurry_rain Blog",
+        href: "https://blog.csdn.net/flurry_rain?spm=1001.2100.3001.5343"
     },{
-        title: "Bean Tech",
-        href: "http://beantech.org"
+        title: "Signature Create",
+        href: "https://fontmeme.com/signature-fonts/"
     },{
-        title: "Hux Blog",
-        href: "http://huangxuan.me"
+        title: "Hexo Themes",
+        href: "https://hexo.io/themes/"
     },{
-        title: "Hexo",
-        href: "https://hexo.io/"
+        title: "Hexo Documents",
+        href: "https://hexo.io/zh-cn/docs/"
+    },{
+        title: "Theme Source",
+        href: "https://github.com/V-Vincen/hexo-theme-livemylife"
     }
 ]
 
 
 # Comment Settings
-
+# TODO: Create chat and analytics functions
 ## Gitalk Settings
 ## Doc:https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 ##
@@ -130,7 +148,6 @@ friends: [
   #language: en                    # Localization language key, en, zh-CN and zh-TW are currently available.
   #maxCommentHeight: 250           # An optional number to limit comments' max height, over which comments will be folded.Default 250.
   #proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token  # GitHub oauth request reverse proxy for CORS. For example, the demo url is 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token'.You should deploy your own proxy url as in this issue https://github.com/gitalk/gitalk/issues/429.
-
 
 ## Gitment Settings
 ## Doc:https://github.com/imsun/gitment
@@ -148,9 +165,7 @@ friends: [
 ##
 # disqus_username: your-disqus-ID
 
-
 # Analytics settings
-
 ## Google Analytics
 #ga_track_id: UA-xxxxxx-xx   # Format: UA-xxxxxx-xx
 
@@ -180,7 +195,6 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-
 
 # Writing
 new_post_name: :lang/:title.md    # File name of new posts
@@ -216,7 +230,7 @@ prismjs:
 default_category: uncategorized
 category_map:
 tag_map:
-home_posts_tag: true    # show posts tags
+home_posts_tag: false    # show posts tags
 
 
 # Date / Time format
@@ -237,24 +251,8 @@ updated_option: date
 per_page: 10
 pagination_dir: archives
 
-# hexo-generator-i18n config
-## Docs: https://github.com/xcatliu/hexo-generator-index-i18n
-index_generator:
-  per_page: 10
-  pagination_dir: page
-  path: ''
-  order_by: -date
-
-archive_generator:
-  enabled: false
-  per_page: 10
-  yearly: true
-  monthly: true
-  daily: false
-  order_by: -date
-
-
 # Markdown-it config
+# TODO: mathjax support
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
 ##
 markdown:
@@ -295,7 +293,7 @@ scroll: true
 # Tip
 tip:
   enable: true
-  # copyright: If you like this blog or find it useful for you, you are welcome to comment on it. You are also welcome to share this blog, so that more people can participate in it. If the images used in the blog infringe your copyright, please contact the author to delete them. Thank you !
+  copyright: If you like this blog or find it useful for you, you are welcome to comment on it. You are also welcome to share this blog, so that more people can participate in it. If the images used in the blog infringe your copyright, please contact the author to delete them. Thank you !
 
 
 # Social Share Post
@@ -318,28 +316,8 @@ themecolor:
 
 
 # Mouseclick config
-mouseclick:
-  enable: true
-  content:
-    - The first step is as good as half over...
-    - Laugh and grow fat...
-    - Man proposes God disposes...
-    - When all else is lost the future still remains...
-    - Wasting time is robbing oneself...
-    - Sharp tools make good work...
-    - Cease to struggle and you cease to live...
-    - A friend in need is a friend indeed...
-    - Faith can move mountains...
-  color:
-    - '#9933CC'
-    - '#339933'
-    - '#66CCCC'
-    - '#FF99CC'
-    - '#CCCCFF'
-    - '#6666CC'
-    - '#663399'
-    - '#66CC99'
-    - '#FF0033'
+#TODO
+#mouseclick:
 
 
 # Ribbon config
@@ -355,6 +333,7 @@ bglinecanvas: false  # The special effects will take up a lot of cpu resorces, p
 ## Dependencies: https://github.com/V-Vincen/hexo-generator-zip-search
 ##
 search:
+  enable: true
   path: search.json
   zipPath: search.flv
   versionPath: searchVersion.json
