@@ -4,55 +4,38 @@
 
 # Site
 title: rains&tyo's blog
-subtitle: 'Talk ih cheap, show me your code'
+subtitle: 'Talk is cheap, show me your code'
 author: 1flurry
 timezone: 'Asia/Shanghai'
 
-# URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://1flurry.github.io/rain_and_tyo/      # Note: don't forget to modify the CNAME file to your url
-root: /rain_and_tyo/
-permalink: :lang/:title/
-permalink_defaults:
-pretty_urls:
-  trailing_index: true
-  trailing_html: true
 
 # Internationalization (i18n) Setting
-language:
+language: # At present, only en、cn and tw are supported. You can customize the language，refer to `languages/en.yml`.
   - en
   - cn
-
 langselect:
   enable: true # If open, it will automatically generation lang-select button.This button can jump in articles in different languages, but the articles must have the same name.
   options: # langselect button display options
     en: English
     cn: 简体中文
+    # tw: 正體中文
 
-# hexo-generator-i18n config
-## Docs: https://github.com/xcatliu/hexo-generator-index-i18n
-index_generator:
-  per_page: 10
-  pagination_dir: page
-  path: ''
-  order_by: -date
 
-archive_generator:
-  enabled: false
-  per_page: 10
-  yearly: true
-  monthly: true
-  daily: false
-  order_by: -date
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://1flurry.github.io/rain_and_tyo/     # Note: don't forget to modify the CNAME file to your url
+root: /rain_and_tyo/
+permalink: :lang/:title/
+permalink_defaults:
 
 # CDN Setting
-# TODO: CDN speed function
 ## Docs: https://www.jsdelivr.com/?docs=gh
 ## If Github Pages deploy，you can ues jsdelivr settings
 #
 # jsdelivr:
 #   jsdelivr_url: https://cdn.jsdelivr.net/gh/
 #   github_username: V-Vincen
+
 
 # Custom Setting Start
 
@@ -68,9 +51,11 @@ archives-img: img/header_img/archive_bg2.jpg
 # Favicon settings
 favicon: img/avatar/WebIcon.jpg
 
+
 # Signature Setup
 signature: true # show signature
 signature-img: img/signature/happygeek-white.png
+
 
 # Wave settings
 wave: false
@@ -79,8 +64,8 @@ wave: false
 # SNS Settings
 # RSS: true
 github_username: 1flurry
-# twitter_username: 1flurry
-# instagram_username: 1flurry
+# twitter_username: V_Vincen_
+# instagram_username: v_vincen_
 # facebook_username:  yourAccount
 # linkedin_username:  yourAccount
 # zhihu_username: WVincen
@@ -137,17 +122,17 @@ friends: [
 ## Doc:https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 ##
 #gitalk:
-  #owner:                          # 'GitHub repo owner
-  #admin:                          # 'GitHub repo'
-  #repo:                           # ['GitHub repo owner and collaborators, only these guys can initialize github issues']
-  #clientID:                       # 'GitHub Application Client ID'
-  #clientSecret:                   # 'GitHub Application Client Secret'
-  #perPage: 10                     # Pagination size, with maximum 100.
-  #pagerDirection: last            # Comment sorting direction, available values are last and first.
-  #createIssueManually: false      # By default, Gitalk will create a corresponding github issue for your every single page automatically when the logined user is belong to the admin users. You can create it manually by setting this option to true
-  #language: en                    # Localization language key, en, zh-CN and zh-TW are currently available.
-  #maxCommentHeight: 250           # An optional number to limit comments' max height, over which comments will be folded.Default 250.
-  #proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token  # GitHub oauth request reverse proxy for CORS. For example, the demo url is 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token'.You should deploy your own proxy url as in this issue https://github.com/gitalk/gitalk/issues/429.
+#  owner:                          # 'GitHub repo owner'
+#  admin:                          # 'GitHub repo'
+#  repo:                           # ['GitHub repo owner and collaborators, only these guys can initialize github issues']
+#  clientID:                       # 'GitHub Application Client ID'
+#  clientSecret:                   # 'GitHub Application Client Secret'
+#  perPage: 10                     # Pagination size, with maximum 100.
+#  pagerDirection: last            # Comment sorting direction, available values are last and first.
+#  createIssueManually: false      # By default, Gitalk will create a corresponding github issue for your every single page automatically when the logined user is belong to the admin users. You can create it manually by setting this option to true
+#  language: en                    # Localization language key, en, zh-CN and zh-TW are currently available.
+#  maxCommentHeight: 250           # An optional number to limit comments' max height, over which comments will be folded.Default 250.
+#  proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token  # GitHub oauth request reverse proxy for CORS. For example, the demo url is 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token'.You should deploy your own proxy url as in this issue https://github.com/gitalk/gitalk/issues/429.
 
 ## Gitment Settings
 ## Doc:https://github.com/imsun/gitment
@@ -165,7 +150,9 @@ friends: [
 ##
 # disqus_username: your-disqus-ID
 
+
 # Analytics settings
+
 ## Google Analytics
 #ga_track_id: UA-xxxxxx-xx   # Format: UA-xxxxxx-xx
 
@@ -195,6 +182,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+
 
 # Writing
 new_post_name: :lang/:title.md    # File name of new posts
@@ -230,7 +218,7 @@ prismjs:
 default_category: uncategorized
 category_map:
 tag_map:
-home_posts_tag: false    # show posts tags
+home_posts_tag: true    # show posts tags
 
 
 # Date / Time format
@@ -251,8 +239,24 @@ updated_option: date
 per_page: 10
 pagination_dir: archives
 
+# hexo-generator-i18n config
+## Docs: https://github.com/xcatliu/hexo-generator-index-i18n
+index_generator:
+  per_page: 10
+  pagination_dir: page
+  path: ''
+  order_by: -date
+
+archive_generator:
+  enabled: false
+  per_page: 10
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+
+
 # Markdown-it config
-# TODO: mathjax support
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
 ##
 markdown:
@@ -316,7 +320,7 @@ themecolor:
 
 
 # Mouseclick config
-#TODO
+# TODO
 #mouseclick:
 
 
@@ -333,7 +337,6 @@ bglinecanvas: false  # The special effects will take up a lot of cpu resorces, p
 ## Dependencies: https://github.com/V-Vincen/hexo-generator-zip-search
 ##
 search:
-  enable: true
   path: search.json
   zipPath: search.flv
   versionPath: searchVersion.json
