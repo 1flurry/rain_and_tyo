@@ -10,15 +10,16 @@ timezone: 'Asia/Shanghai'
 
 
 # Internationalization (i18n) Setting
-language: # At present, only en、cn and tw are supported. You can customize the language，refer to `languages/en.yml`.
-  - en
-  - cn
-langselect:
-  enable: true # If open, it will automatically generation lang-select button.This button can jump in articles in different languages, but the articles must have the same name.
-  options: # langselect button display options
-    en: English
-    cn: 简体中文
-    # tw: 正體中文
+# TODO multi language
+#language: # At present, only en、cn and tw are supported. You can customize the language，refer to `languages/en.yml`.
+#  - en
+#  - cn
+#langselect:
+#  enable: false # If open, it will automatically generation lang-select button.This button can jump in articles in different languages, but the articles must have the same name.
+#  options: # langselect button display options
+#    en: English
+#    cn: 简体中文
+#    tw: 正體中文
 
 
 # URL
@@ -27,6 +28,7 @@ url: https://1flurry.github.io/rain_and_tyo/     # Note: don't forget to modify 
 root: /rain_and_tyo/
 permalink: :lang/:title/
 permalink_defaults:
+  lang: cn
 
 # CDN Setting
 ## Docs: https://www.jsdelivr.com/?docs=gh
