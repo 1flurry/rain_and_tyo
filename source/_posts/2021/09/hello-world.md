@@ -6,4 +6,6 @@ subtitle:
 header-img:
 tags:
 categories:
+lang: cn
+header-img: /rain_and_tyo/img/header_img/lml_bg.jpg
 ---

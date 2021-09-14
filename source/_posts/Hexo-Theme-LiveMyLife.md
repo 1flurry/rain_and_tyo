@@ -4,7 +4,7 @@ catalog: true
 date: 2020-04-17 02:34:17
 subtitle: A succinct hexo theme...
 lang: cn
-header-img: /img/header_img/lml_bg.jpg
+header-img: /rain_and_tyo/img/header_img/lml_bg.jpg
 tags:
 - Hexo-Theme-LiveMyLife
 categories:
