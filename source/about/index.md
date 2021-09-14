@@ -68,8 +68,3 @@ header-img: "img/scenery/about_bg.jpg"
 ## Contact me
 
 > Email：flurry_rains@qq.com
-
-## Treat me to coffee
->  If you feel that what I have written is of some value to you, I am glad that you are willing to invite me to drink coffee...
-
-<img src="/rain_and_tyo/img/scenery/treat_me_to_coffee.png" width="350" alt="treat_me_to_coffee.png"></img>
