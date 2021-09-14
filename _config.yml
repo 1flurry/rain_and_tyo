@@ -26,9 +26,8 @@ timezone: 'Asia/Shanghai'
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://1flurry.github.io/rain_and_tyo/     # Note: don't forget to modify the CNAME file to your url
 root: /rain_and_tyo/
-permalink: :lang/:title/
+permalink: :year/:month/:title/
 permalink_defaults:
-  lang: cn
 
 # CDN Setting
 ## Docs: https://www.jsdelivr.com/?docs=gh
@@ -182,12 +181,12 @@ tag_dir: tags
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
-i18n_dir: :lang
+#i18n_dir: :lang
 skip_render:
 
 
 # Writing
-new_post_name: :lang/:title.md    # File name of new posts
+new_post_name: :year/:month/:title.md    # File name of new posts
 default_layout: post
 auto_spacing: true
 titlecase: false    # Transform title into titlecase
