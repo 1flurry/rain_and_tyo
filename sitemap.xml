@@ -4,21 +4,21 @@
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo/tags/index.html</loc>
     
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     
   </url>
   
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo/categories/index.html</loc>
     
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     
   </url>
   
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo/404.html</loc>
     
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     
   </url>
   
@@ -26,13 +26,6 @@
     <loc>https://1flurry.github.io/rain_and_tyo/2021/09/hello-world/</loc>
     
     <lastmod>2021-09-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://1flurry.github.io/rain_and_tyo/2020/04/Hexo-Theme-LiveMyLife/</loc>
-    
-    <lastmod>2020-04-16</lastmod>
     
   </url>
   
@@ -53,7 +46,7 @@
 
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo</loc>
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -61,14 +54,7 @@
   
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo/tags/hello-world/</loc>
-    <lastmod>2021-09-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://1flurry.github.io/rain_and_tyo/tags/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -77,14 +63,7 @@
   
   <url>
     <loc>https://1flurry.github.io/rain_and_tyo/categories/hello-world/</loc>
-    <lastmod>2021-09-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://1flurry.github.io/rain_and_tyo/categories/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-09-14</lastmod>
+    <lastmod>2021-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
