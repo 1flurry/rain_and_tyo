@@ -7,7 +7,6 @@ tags:
 - hello_world
 categories:
 - hello_world
-lang: cn
 header-img: /rain_and_tyo/img/titles_img/hello_world_bg.jpg
 ---
 
