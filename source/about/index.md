@@ -3,7 +3,7 @@ layout: "about"
 title: "About"
 date: 2016-04-21 04:48:33
 description: "那些年吹过的牛逼，还有很多没有实现 ......"
-header-img: "img/scenery/about_bg.jpg"
+header-img: "img/header_img/about_header_bg.jpeg"
 ---
 
 ## Talk To Me
@@ -18,52 +18,34 @@ header-img: "img/scenery/about_bg.jpg"
 
 ## Just Me
 
-<img src="/rain_and_tyo/img/scenery/about_bg2.jpg" width="350" alt="about_bg2"></img>
+<img src="/rain_and_tyo/img/about/about_bg2.jpeg" width="350" alt="about_bg2"></img>
 
-> 有一种状态 叫一个人 它总是挑战语言的贫乏 只能在某首歌中找寻灵感；
+> 来自北方小镇
 >
-> 有一种氨基酸 叫多巴胺 你不知道它何时会在你体内产生；
+> 求学于西京
 >
-> 有一种上瘾 叫抽烟 其实你抽的只是心情 又或是寂寞；
+> web不会做，pwn不会解，misc没思路，reverse逆不动，大抵是一条菜狗
 >
-> 有一种态度 叫纹身 其实我们只是想与众不同；
+> 见一行爱一行，三分钟热度的身体力行者
 >
-> 有一种经历 叫旅行 年轻只有一次 不出去走走 或许以为眼前的就是世界；
->
-> 有一种人生 叫心电图 如果你总是一帆风顺 那么你就挂了；
->
-> 有一种悠闲 叫 " 老板给我杯Cappuccino " 香香甜甜 浓郁中带着苦涩 醇和而隽永 …
+> 不想当geek的程序员不是好吉他手
 
 
 
 ## The Longest Way ...
 
-<img src="/rain_and_tyo/img/scenery/about_bg4.jpg" width="350" alt="about_bg4"></img>
+<img src="/rain_and_tyo/img/about/about_bg4.jpeg" width="350" alt="about_bg4"></img>
 
->  活在当下 然后忘记 继续往前走 ...
+>  好好学习，天天向上
 >
->  即便是一个人 ...
+>  选你所爱，爱你所选
 >
->  On the way to meet myself …
+>  Just for fun!
 
 
 ## Follow With Interest Blogs
 
-> Neo Peng：https://zhile.io
->
-> 李卫民：https://www.funtl.com/zh/guide
->
-> duanxz：https://www.cnblogs.com/duanxz/tag
->
-> Java1234_小锋：http://blog.java1234.com/index.html
->
-> Deserts：https://deserts.io
->
-> Super Snail：https://www.dusign.net
->
-> KIERAN'S BLOG：https://go.kieran.top
->
-> Mr.Seven：https://itimetraveler.github.io
+> 小小鱼的博客：https://blog.csdn.net/flurry_rain
 
 ## Contact me
 

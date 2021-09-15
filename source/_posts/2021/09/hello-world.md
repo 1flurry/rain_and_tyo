@@ -8,5 +8,8 @@ tags:
 categories:
 - hello_world
 lang: cn
-header-img: /rain_and_tyo/img/header_img/lml_bg.jpg
+header-img: /rain_and_tyo/img/titles_img/hello_world_bg.jpg
 ---
+
+# welcome to my world
+![new world](1.jpeg)
