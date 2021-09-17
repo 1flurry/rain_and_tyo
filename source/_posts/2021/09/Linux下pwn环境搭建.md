@@ -34,9 +34,9 @@ header-img: /rain_and_tyo/img/titles_img/hello_world_bg.jpg
 # 2. 开始安装
 1）安装pwntools：
 直接使用pip安装：
-```
-pip install pwntools
 ```bash
+pip install pwntools
+```
 **注意**：如果设备上同时存在python2和python3注意区别，这里要下载的是python3的
 
 2）安装checksec、ropgadget：
