@@ -106,10 +106,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://1flurry.github.io/rain_and_tyo/rain_and_tyo/2021/09/Linux下pwn环境搭建/">
+  <link rel="canonical" href="https://1flurry.github.io/rain_and_tyo/rain_and_tyo/2021/09/pwntools使用初探——简单栈溢出利用/">
   <title>
     
-      Linux下pwn环境搭建 - ClearLove | 爱你所选
+      pwntools使用初探——简单栈溢出利用 - ClearLove | 爱你所选
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -305,19 +305,19 @@
     .body--light {
       /* intro-header */
       --intro-header-background-image-url-home: url('/rain_and_tyo/img/header_img/home_bg.jpeg');
-      --intro-header-background-image-url-post: url('/rain_and_tyo/img/titles_img/hello_world_bg.jpg');
-      --intro-header-background-image-url-page: url('/rain_and_tyo//rain_and_tyo/img/titles_img/hello_world_bg.jpg');
+      --intro-header-background-image-url-post: url('');
+      --intro-header-background-image-url-page: url('/rain_and_tyo/');
     }
     .body--dark {
       --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/rain_and_tyo/img/header_img/home_bg.jpeg');
-      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/rain_and_tyo/img/titles_img/hello_world_bg.jpg');
-      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/rain_and_tyo//rain_and_tyo/img/titles_img/hello_world_bg.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/rain_and_tyo/');
     }
 
     header.intro-header {
        /*post*/
         background-image: var(--intro-header-background-image-url-post);
-        /* background-image: url('/rain_and_tyo/img/titles_img/hello_world_bg.jpg'); */
+        /* background-image: url(''); */
       
     }
 
@@ -342,14 +342,8 @@
           <div class="post-heading">
             <div class="tags">
               
-              <a class="tag" href="/rain_and_tyo/tags/#二进制" title="二进制">二进制</a>
-              
-              <a class="tag" href="/rain_and_tyo/tags/#pwn" title="pwn">pwn</a>
-              
-              <a class="tag" href="/rain_and_tyo/tags/#linux" title="linux">linux</a>
-              
             </div>
-            <h1>Linux下pwn环境搭建</h1>
+            <h1>pwntools使用初探——简单栈溢出利用</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
               Posted by 1flurry on
@@ -361,11 +355,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">2</span> Minutes
+              Estimated Reading Time <span class="post-count">6</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">645</span> In Total
+              Words <span class="post-count">1.8k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -412,75 +406,71 @@
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
         <p>​</p>
-<h1>0. 环境准备</h1>
+<h1>0. 前言</h1>
+<p>使用pwntools来实现一个简单的栈溢出利用，以此来熟悉一下pwndbg+tmux调试pwntools脚本</p>
+<h1>1. 环境准备</h1>
 <blockquote>
-<p>Ubuntu 20.04</p>
-<p>x86_64</p>
-<p>python3.8.*</p>
-<p>gdb 9.2</p>
+<p>操作系统：Ubuntu 20.04<br>
+cpu架构：x86_64<br>
+gdb：9.2<br>
+python：3.8.5<br>
+pwndbg：2020.07.23</p>
 </blockquote>
-<h1>1. 安装列表</h1>
-<table>
-<thead>
-<tr>
-<th>pwntools</th>
-<th>python的CTF框架和漏洞利用开发库</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>checksec</td>
-<td>可以查看二进制文件开启了哪些保护机制</td>
-</tr>
-<tr>
-<td>ropgadget</td>
-<td>寻找合适的 gadgets，在编ROP exp 的时候有很大作用</td>
-</tr>
-<tr>
-<td>pwndbg</td>
-<td>gdb的插件，在ctf中pwn题目中使用非常方便，依赖python</td>
-</tr>
-<tr>
-<td>tmux</td>
-<td>是一个终端复用器，结合gdb使用，可以方便调试python脚本</td>
-</tr>
-<tr>
-<td>Ghidra</td>
-<td>开源的软件逆向工具</td>
-</tr>
-</tbody>
-</table>
-<h1>2. 开始安装</h1>
-<p>1）安装pwntools：<br>
-直接使用pip安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pwntools</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：如果设备上同时存在python2和python3注意区别，这里要下载的是python3的</p>
-<p>2）安装checksec、ropgadget：<br>
-安装好pwntools应该已经装好这两个工具了，可以直接输入checksec、ROPgadget命令试一下：<br>
-<img src="1.png" alt="new world"></p>
-<p>如果没有，可以尝试使用pip install直接安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install checksec</span><br><span class="line">pip install ropgadget</span><br></pre></td></tr></table></figure>
-<p>3）安装pwndbg：<br>
-github链接：<br>
-<a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg">https://github.com/pwndbg/pwndbg</a></p>
-<p>直接下载最新版本，参考reademe的操作进行安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
-<p>安装需要依赖python环境，如果apt-get install命令执行有报错可以尝试手动复制脚本的代码执行一下，可能存在安装的组件名字不一致导致命令执行失败的情况，这种情况可以直接注释掉setup.sh脚本里报错的apt-get install操作，直接往后执行。</p>
-<p>安装完成后，会有一个/root/.gdbinit生成，因为只在root目录下有，所以目前只有root用户执行gdb的时候才会加载该插件，如果想用非root用户，则可以把.gdbinit文件复制到相应用户的根目录下面，比如复制到/home/test目录，则test用户执行gdb也可以加载pwndbg插件（注意，要确保非root用户有执行.gdbinit文件中指向的python脚本的权限，如果没有权限则需要添加权限）<br>
-插件激活成功的效果如下：<br>
-<img src="2.png" alt="new world"></p>
-<p>4）安装tmux:<br>
-直接apt安装即可：apt install tmux，结合pwntool和gdb的使用方法可以参考如下文章：<br>
-<a target="_blank" rel="noopener" href="https://tianstcht.github.io/pwntools%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">pwntools的使用技巧</a></p>
-<p>5）安装Ghidra：<br>
-github链接：<br>
-<a target="_blank" rel="noopener" href="https://github.com/NationalSecurityAgency/ghidra">https://github.com/NationalSecurityAgency/ghidra</a></p>
-<p>参考readme安装即可，提供了两种安装方式，一种是直接安装编好的二进制，另一种是源码编译。</p>
-<p>源码编译可参考如下说明：<br>
-<a target="_blank" rel="noopener" href="https://github.com/NationalSecurityAgency/ghidra/blob/master/DevGuide.md">https://github.com/NationalSecurityAgency/ghidra/blob/master/DevGuide.md</a></p>
-<p>Ghidra是java编写的，需要安装JDK，linux平台JDK安装可以参考如下：</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/samcn/archive/2011/03/16/1986248.html">linux配置java环境变量(详细)</a></p>
-<p>windows平台安装JDK直接下载msi文件即可</p>
+<h1>2. 测试程序准备</h1>
+<p>首先准备一份有栈溢出漏洞的代码保存在test.c文件中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> password[<span class="number">8</span>];</span><br><span class="line">    <span class="keyword">char</span> your_password[<span class="number">8</span>];</span><br><span class="line">    <span class="keyword">int</span> fd = open(<span class="string">&quot;/dev/random&quot;</span>, O_RDONLY);</span><br><span class="line">    read(fd, password, <span class="number">8</span>);</span><br><span class="line">    close(fd);</span><br><span class="line">    gets(your_password);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strncmp</span>(your_password, password, <span class="number">8</span>) == <span class="number">0</span>)&#123;</span><br><span class="line">        system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;The password is not right.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这份源码的功能是：<br>
+获取一个8位随机字符，然后输入一个8位字符串，如果输入的字符串与获取的随机字符串一样，则弹出shell。我们想实现的目标就是利用这个程序获得shell。</p>
+<p>编译源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o <span class="built_in">test</span> -no-pie -fno-stack-protector -z execstack （-m32）</span><br></pre></td></tr></table></figure>
+<p>执行上述命令后会得到一个64位的test可执行文件（如果需要32位的则加上-m32参数），注意，为了方便实验，gcc编译命令后面加了几个参数，确保输出的可执行文件的NX、canary保护、地址随机化等保护手段都是失效的。</p>
+<p>使用checksec工具查看test程序的保护是不是都关闭了，如果输出如下则说明ok：<br>
+<img src="1.png" alt="1"></p>
+<h1>3. 思路分析</h1>
+<p>观察源码可以看出，使用了危险函数gets，因此gets函数的参数your_password有可能会发生溢出。</p>
+<p>为了实现执行system命令的目标，有两种思路：</p>
+<blockquote>
+<ol>
+<li>利用溢出覆盖掉password的值，让strncmp执行成功；</li>
+<li>利用溢出，让函数直接跳转到system函数的位置，执行system函数</li>
+</ol>
+</blockquote>
+<h1>4. 开始利用</h1>
+<h2 id="1）gdb分析test程序">1）gdb分析test程序</h2>
+<p>a. 首先在gets、strncpy函数处下断点（b 函数名可以设置断点，ni可以逐行汇编执行），获取your_password和password变量的内存地址（因为我们编译的时候使用了-no-pie，所以这个地址是不会变的）：<br>
+首先获取your_password的地址（gets函数的第一个参数）：<br>
+<img src="2.png" alt="2"><br>
+然后获取password的地址（strncmp函数的第二个参数）：<br>
+<img src="3.png" alt="3"><br>
+可以看出，<strong>password的地址高于your_password地址</strong>，因此可以通过溢出your_password来实现覆盖password的值，思路一可行（<strong>栈溢出是从低地址往高地址溢出</strong>）。<br>
+b. 同时我们可以看到strncmp函数下面有system函数的地址(0x7fffffffe3bc)，这个地址在思路二中可以用到：<br>
+<img src="4.png" alt="4"></p>
+<p>c. 使用nextret命令查看ret返回的地址，因为ret指令返回的地址是从rsp寄存器获取的，因此查看ret指令执行前rsp寄存器的值即可：<br>
+<img src="5.png" alt="5"></p>
+<p>通过观察ret指令执行前的汇编操作，我们发现rsp寄存器的地址其实就是leave操作来更新的，也就是通过rbp算出来的，而<strong>rbp地址在rsp这个地址的高位（可以用ni操作逐步执行到ret指令看一下）</strong>，因此我们可以直接溢出到rsp的这个地址，往里写入system函数的地址，实现思路二。</p>
+<p>这里要注意的是，我强调了rsp地址的获取方式，因为我们要注意<strong>溢出时不要把rsp地址获取的基线给覆盖了</strong>，比如rbp位置位于rsp地址的下面，而rsp地址又是要用rbp里的存的内容来计算的，这种情况如果直接覆盖掉rsp地址的内容，势必会把下面rbp的内容一起覆盖，导致无法正常找到预期的rsp的地址。所以我们<strong>一定要注意观察ret操作之前，rsp的地址是怎么获取的。</strong></p>
+<h2 id="2）验证思路一">2）验证思路一</h2>
+<p>思路一是想通过溢出，使得password和your_password的值一致，从而实现strncmp成功，执行system语句。因此实现这个思路，需要your_password地址位于password底下，然后计算出两个地址之间的距离，便能得到需要构造多长的字符串。</p>
+<p>由上一步我们得到了your_password的地址为0x7fffffffe3bc，password的地址为0x7fffffffe3c4，两者相减为0x8，因此只要字符超过8位就可以覆盖到password的值，而通过观察strncpy函数的第三个参数，函数就是比较8个字符长度，因此password覆盖掉8个字节即可，所以需要构造一个16字节长的、前后8字节的字符相同的字符串，为了方便我们直接输入16个’a’来测试：<br>
+<img src="6.png" alt="6"></p>
+<p>成功返回shell！</p>
+<h2 id="3）验证思路二">3）验证思路二</h2>
+<p>思路二是想通过覆盖ret返回的地址的内容，把ret返回的地址的内容改为system函数的位置，这样执行完ret指令后，就会直接跳转到system函数执行。</p>
+<p>实现这个思路需要注意的就是rsp寄存器的值是怎么获取的，不要把获取rsp值的基地址给覆盖了，还有一个点是，不要直接把system指令的地址覆盖进去，因为system是有参数的，要返回参数赋值操作的地址：<br>
+<img src="7.png" alt="7"></p>
+<p>从gdb中我们可看到，strncmp函数会有一个jne判断跳转的操作，而system就是跳转之后执行的，因此0x401272就是system指令最开始准备阶段的地址，我们直接把这个覆盖到ret返回地址内容里即可。</p>
+<p>确定了system指令的起始地址后，下一步是计算溢出点到ret地址之间的距离，由之前的分析可知，溢出点your_password的地址为0x7fffffffe3bc，ret指令返回的地址为0x7fffffffe3d8，且这个地址是从更高的rbp寄存器里计算得到的，因此我们可以直接从溢出点覆盖到ret地址，经过计算这两个地址直接的距离为28，下面我们使用pwntools来实现该操作，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>] <span class="comment">#设置tmux，脚本执行的时候窗口会左右分开，左侧为运行试图，右侧为gdb试图</span></span><br><span class="line">p = process(<span class="string">&quot;./test&quot;</span>)             <span class="comment"># 可执行文件的名字</span></span><br><span class="line">sys_addr = p64(<span class="number">0x401272</span>)          <span class="comment"># system指令的开始位置，如果是32位的程序则使用p32</span></span><br><span class="line">buf = <span class="string">b&#x27;b&#x27;</span> + <span class="string">b&#x27;a&#x27;</span>*<span class="number">27</span> + sys_addr   <span class="comment"># 构造一个长度为28字节的串，注意这里第一个字节用了一个b，</span></span><br><span class="line">                                  <span class="comment"># 这是为了保证不会自动走到system函数</span></span><br><span class="line"></span><br><span class="line">gdb.attach(p)                     <span class="comment"># 使用gdb断住程序，位置是在gets函数</span></span><br><span class="line"></span><br><span class="line">p.sendline(buf)                   <span class="comment"># 把buff发送给程序</span></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>这个脚本要在tmux里运行，如果不想在tmux里运行，则需要注释掉context和gdb语句，运行效果如下：<br>
+<img src="8.png" alt="8"></p>
+<p>在这个位置下断点，c命令继续执行，可直接返回到main函数：<br>
+<img src="9.png" alt="9"></p>
+<p>nextret直接跳转到ret指令，发现rsp寄存器存的地址指向的位置正是我们注入的system指令的位置：<br>
+<img src="10.png" alt="10"></p>
+<p>退出调试，发现成功得到shell：<br>
+<img src="11.png" alt="11"></p>
+<h1>5. 小结</h1>
+<p>这个实例主要是初步介绍了栈溢出的简单利用思路，以及如何使用pwndbg+tmux+pwntools来调试实现对栈溢出的利用，有问题还请指正。</p>
 <p>​</p>
 
 
@@ -488,13 +478,9 @@ github链接：<br>
         <!-- Pager -->
         <ul class="pager">
           
-          <li class="previous">
-            <a href="/rain_and_tyo/2021/09/pwntools使用初探——简单栈溢出利用/" data-toggle="tooltip" data-placement="top" title="pwntools使用初探——简单栈溢出利用">&larr; Previous Post</a>
-          </li>
-          
           
           <li class="next">
-            <a href="/rain_and_tyo/2021/09/GDB多线程和子进程调试/" data-toggle="tooltip" data-placement="top" title="GDB多线程和子进程调试">Next Post &rarr;</a>
+            <a href="/rain_and_tyo/2021/09/Linux下pwn环境搭建/" data-toggle="tooltip" data-placement="top" title="Linux下pwn环境搭建">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -543,7 +529,7 @@ github链接：<br>
       </a>
     </li>
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=Linux下pwn环境搭建&body=Hi,I found this website and thought you might like it https://1flurry.github.io/rain_and_tyo/rain_and_tyo/2021/09/Linux下pwn环境搭建/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=pwntools使用初探——简单栈溢出利用&body=Hi,I found this website and thought you might like it https://1flurry.github.io/rain_and_tyo/rain_and_tyo/2021/09/pwntools使用初探——简单栈溢出利用/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -581,7 +567,7 @@ github链接：<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">0. 环境准备</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1. 安装列表</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2. 开始安装</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">0. 前言</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1. 环境准备</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2. 测试程序准备</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">3. 思路分析</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4. 开始利用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1%EF%BC%89gdb%E5%88%86%E6%9E%90test%E7%A8%8B%E5%BA%8F"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">1）gdb分析test程序</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2%EF%BC%89%E9%AA%8C%E8%AF%81%E6%80%9D%E8%B7%AF%E4%B8%80"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">2）验证思路一</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3%EF%BC%89%E9%AA%8C%E8%AF%81%E6%80%9D%E8%B7%AF%E4%BA%8C"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">3）验证思路二</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">5. 小结</span></a></li></ol>
         
         </div>
       </aside>
@@ -603,12 +589,6 @@ github链接：<br>
             <a href="/rain_and_tyo/tags/">FEATURED TAGS</a>
           </h5>
           <div class="tags">
-            
-            <a class="tag" href="/rain_and_tyo/tags/#二进制" title="二进制">二进制</a>
-            
-            <a class="tag" href="/rain_and_tyo/tags/#pwn" title="pwn">pwn</a>
-            
-            <a class="tag" href="/rain_and_tyo/tags/#linux" title="linux">linux</a>
             
           </div>
         </section>
