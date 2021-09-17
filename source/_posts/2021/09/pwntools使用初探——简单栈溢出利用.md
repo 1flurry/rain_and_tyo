@@ -3,9 +3,14 @@ title: pwntools使用初探——简单栈溢出利用
 catalog: true
 date: 2021-09-17 22:25:40
 subtitle:
-header-img:
 tags:
+- 二进制
+- pwn
+- linux
 categories:
+- 技术
+lang: en
+header-img: /rain_and_tyo/img/titles_img/hello_world_bg.jpg
 ---
 ​
 # 0. 前言
